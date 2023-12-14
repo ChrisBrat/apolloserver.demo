@@ -8,7 +8,8 @@ module.exports = {
     },
     Library: bookResolvers.Library,
     Book: bookResolvers.Book,
-    Person: bookResolvers.Person
+    Person: bookResolvers.Person,
+    Child: bookResolvers.Child
     // ,
     // Mutation: {
     //    ...messageResolvers.Mutation

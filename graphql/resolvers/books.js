@@ -44,13 +44,38 @@ const children = [
   ];
 
 
+const addresses = [
+    {
+      name: 'Child1',
+      streetNumber: '1',
+      streetName: 'Street name 1',
+      postalCode: '1111'
+    },
+    {
+      name: 'Child2',
+      streetNumber: '2',
+      streetName: 'Street name 3',
+      postalCode: '2222'
+    },
+    {
+      name: 'Adult1',
+      streetNumber: '3',
+      streetName: 'Street name 3',
+      postalCode: '3333'
+    },
+    {
+      name: 'Adult2',
+      streetNumber: '4',
+      streetName: 'Street name 4',
+      postalCode: '4444'
+    },
+  ];
 
 
 module.exports = {
   
     Query:{  
         libraries() {
-            console.log('libraries');
             return libraries;
         },
         people(parent, args, contextValue, info) { 
@@ -62,7 +87,6 @@ module.exports = {
         books(parent) {
           // Filter the hardcoded array of books to only include
           // books that are located at the correct branch
-          console.log('parent.branch : '+parent.branch);
           return books.filter((book) => book.branch === parent.branch);
         },
       },
@@ -87,5 +111,20 @@ module.exports = {
         }
         return null; // GraphQLError is thrown
       },
+    },
+    // For resolvers that are part of a union, implement the resolver on the types in the union and not the union
+    Child: {
+      // filter the address records against the parent object identifier (child.name) 
+      address(parent) {
+        // returns an Address type object ()
+        return addresses.find((address) => address.name === parent.name);
+      }
+    },
+    Adult: {
+      // filter the address records against the parent object identifier (adult.name) 
+      address(parent) {
+        // returns an Address type object ()
+        return addresses.find((address) => address.name === parent.name);
+      }
     },
 }

@@ -30,16 +30,25 @@ union Person = Adult | Child
 
 interface Human{
     name: String!
+    address: Address
 }
 
 type Adult implements Human{
     name: String!
     job: String!
+    address: Address
 }
 
 type Child implements Human{
     name: String!
     school: String!
+    address: Address
+}
+
+type Address{
+    streetNumber: String
+    streetName: String
+    postalCode: String
 }
 
 # Queries
