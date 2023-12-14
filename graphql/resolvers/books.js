@@ -21,17 +21,41 @@ const books = [
     },
   ];
 
-module.exports = {
-    
+const adults = [
+    {
+      name: 'Adult1',
+      job: 'Job1',
+    },
+    {
+      name: 'Adult2',
+      job: 'Job2',
+    },
+  ];
 
+const children = [
+    {
+      name: 'Child1',
+      school: 'School1',
+    },
+    {
+      name: 'Child2',
+      school: 'School2',
+    },
+  ];
+
+
+
+
+module.exports = {
+  
     Query:{  
         libraries() {
             console.log('libraries');
             return libraries;
         },
-        // books(_,args) {
-        //     return books;
-        // }
+        people(parent, args, contextValue, info) { 
+          return adults.concat(children); 
+        }
     },
     // Resolver chain
     Library:{
@@ -50,5 +74,18 @@ module.exports = {
             name: parent.author,
           };
         }
-    }
+    },
+    Person: {
+      __resolveType(obj, contextValue, info){
+        // Only adults have a job field
+        if(obj.job){
+          return 'Adult';
+        }
+        // Only children have a school field
+        if(obj.school){
+          return 'Child';
+        }
+        return null; // GraphQLError is thrown
+      },
+    },
 }

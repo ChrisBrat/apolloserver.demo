@@ -7,7 +7,8 @@ module.exports = {
         ...bookResolvers.Query
     },
     Library: bookResolvers.Library,
-    Book: bookResolvers.Book
+    Book: bookResolvers.Book,
+    Person: bookResolvers.Person
     // ,
     // Mutation: {
     //    ...messageResolvers.Mutation
